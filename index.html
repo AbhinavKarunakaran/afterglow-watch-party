@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101016">
+  <title>Afterglow — Watch Party</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-mark">✦</span> afterglow<span class="brand-dot">.</span></a>
+    <div class="top-actions"><span class="online-dot"></span><span id="connection-label">Ready for movie night</span><button class="btn btn-quiet" id="copy-invite" hidden>Copy invite ↗</button></div>
+  </header>
+
+  <main>
+    <section class="hero" id="lobby">
+      <div class="eyebrow"><span class="eyebrow-line"></span> YOUR PEOPLE. YOUR SCREEN. ONE MOMENT.</div>
+      <h1>Movie night,<br><span class="gradient-text">together.</span></h1>
+      <p class="hero-copy">A little closer, even when you're miles apart. Sync the screen, share the snacks-in-spirit, and make a night of it.</p>
+      <div class="lobby-card">
+        <div class="lobby-tabs"><span class="tab active">Start a party</span><span class="tab-note">No popcorn required 🍿</span></div>
+        <label for="display-name">YOUR PARTY NAME</label>
+        <input id="display-name" maxlength="22" placeholder="e.g. Alex" value="">
+        <button id="create-room" class="btn btn-primary">Create a room <span>↗</span></button>
+        <div class="or-divider"><span></span> OR JOIN YOUR FRIENDS <span></span></div>
+        <div class="join-row"><input id="room-code" maxlength="6" placeholder="ENTER ROOM CODE"><button id="join-room" class="btn btn-outline">Join party</button></div>
+        <p class="fine-print">By entering, you agree that the group chat will absolutely judge your movie picks.</p>
+        <p id="lobby-error" class="error"></p>
+      </div>
+      <div class="hero-foot"><span>✳ Made for shared moments</span><span>01 — Gather your crew</span></div>
+    </section>
+
+    <section id="party" class="party hidden">
+      <div class="party-heading">
+        <div><div class="eyebrow"><span class="eyebrow-line"></span> THE LIVING ROOM</div><h2 id="room-title">Your watch party</h2><p class="muted">The best scenes are better together.</p></div>
+        <div class="room-code-box"><span>ROOM CODE</span><strong id="code-display">------</strong><button id="copy-code" title="Copy room code">⧉</button></div>
+      </div>
+      <div class="party-grid">
+        <section class="main-column">
+          <div class="player-card">
+            <div class="player-top"><span class="live-pill"><i></i> LIVE ROOM</span><span id="host-label" class="host-label">HOST CONTROLS PLAYBACK</span></div>
+            <div class="video-wrap"><div id="video-frame" class="video-frame"><div class="video-placeholder"><div class="play-orb">▶</div><p>Pick a video to start the movie night</p><span>Shared playback · synced for everyone</span></div></div><div id="reaction-float" class="reaction-float"></div></div>
+            <div class="now-playing"><div><span class="mini-label">NOW PLAYING</span><h3 id="now-title">Big Buck Bunny</h3></div><span class="sync-status"><span class="online-dot"></span> Sync ready</span></div>
+            <div class="player-controls"><button id="play-pause" class="control-play" title="Play or pause">▶</button><div class="timeline"><div class="timeline-track"><div id="timeline-fill"></div></div><div class="time-row"><span id="current-time">00:00</span><span id="duration-time">--:--</span></div></div><button id="back-10" class="control-icon" title="Back 10 seconds">↶ 10</button><button id="forward-10" class="control-icon" title="Forward 10 seconds">10 ↷</button></div>
+            <div class="player-note">Tip: the host controls the shared timeline. Everyone else can react, vote, and queue the next pick.</div>
+          </div>
+          <div class="discovery-section">
+            <div class="section-heading"><div><span class="mini-label">TONIGHT'S LINEUP</span><h3>Find your next favorite</h3></div><span class="muted small">A few crowd-pleasers</span></div>
+            <div class="filter-row"><input id="movie-search" placeholder="⌕  Search movies, moods, genres…"><select id="genre-filter"><option value="All">All moods</option><option>Comedy</option><option>Adventure</option><option>Drama</option><option>Animation</option><option>Sci-Fi</option></select></div>
+            <div id="movie-grid" class="movie-grid"></div>
+          </div>
+          <div class="queue-section">
+            <div class="section-heading"><div><span class="mini-label">UP NEXT</span><h3>Shared queue <span id="queue-count" class="count-pill">0</span></h3></div><span class="muted small">Everyone gets a pick</span></div>
+            <div id="playlist" class="playlist"><div class="empty-state">Your queue is a blank canvas. Add a movie above ✨</div></div>
+          </div>
+        </section>
+        <aside class="side-column">
+          <div class="side-card people-card"><div class="side-heading"><h3>In the room</h3><span id="people-count" class="count-pill">1</span></div><div id="member-list" class="member-list"></div><button id="transfer-host" class="text-button">Transfer host role ↗</button></div>
+          <div class="side-card chat-card"><div class="side-heading"><div><h3>Party chat</h3><p class="muted small">Say it while the credits roll.</p></div><span class="chat-live">LIVE</span></div><div class="reaction-bar"><button data-emoji="❤️">❤️</button><button data-emoji="😂">😂</button><button data-emoji="🔥">🔥</button><button data-emoji="👏">👏</button><button data-emoji="😮">😮</button><button data-emoji="🍿">🍿</button></div><div id="chat-messages" class="chat-messages"><div class="chat-welcome">Welcome in! Drop a hello or a hot take. 🍿</div></div><form id="chat-form" class="chat-form"><input id="chat-input" maxlength="400" placeholder="Send a message…"><button aria-label="Send message">↑</button></form></div>
+          <div class="side-card poll-card"><div class="side-heading"><div><h3>Group vote</h3><p class="muted small">Democracy, but cinematic.</p></div><span>✳</span></div><div id="poll-list"><p class="empty-poll">Settle the eternal question: what next?</p></div><button id="new-poll" class="btn btn-outline btn-small">＋ Create a poll</button></div>
+        </aside>
+      </div>
+      <footer class="party-footer"><span>✦ AFTERGLOW</span><span>Better together, frame by frame.</span><button id="leave-room" class="text-button">Leave party</button></footer>
+    </section>
+  </main>
+  <div id="toast" class="toast"></div>
+  <dialog id="poll-dialog"><form method="dialog" id="poll-form"><div class="dialog-head"><span class="mini-label">GROUP DECISION</span><button class="close-dialog" value="cancel">×</button></div><h2>Let the group decide.</h2><label>QUESTION</label><input id="poll-question" maxlength="140" placeholder="What should we watch next?" required><label>OPTION 1</label><input class="poll-option" maxlength="60" placeholder="Comedy night" required><label>OPTION 2</label><input class="poll-option" maxlength="60" placeholder="A little mystery" required><label>OPTION 3 (OPTIONAL)</label><input class="poll-option" maxlength="60" placeholder="Surprise me"><label>OPTION 4 (OPTIONAL)</label><input class="poll-option" maxlength="60" placeholder="Classic rewatch"><button class="btn btn-primary" id="submit-poll" value="default">Start the vote ↗</button></form></dialog>
+  <script src="/socket.io/socket.io.js"></script><script src="/app.js"></script>
+</body></html>
