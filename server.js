@@ -10,7 +10,11 @@ const io = new Server(server);
 const PORT = process.env.PORT || 3000;
 const rooms = new Map();
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(__dirname));
+
+app.get("/", (_req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
 app.get("/health", (_req, res) => res.json({ ok: true, rooms: rooms.size }));
 
 function makeCode() {
